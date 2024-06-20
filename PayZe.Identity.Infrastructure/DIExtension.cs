@@ -22,7 +22,6 @@ public static class DIExtension
             options.UseNpgsql(environmentSettings.Value.DatabaseConnection);
         });
 
-        services.AddScoped<IMigrationDbContext, IdentityDbContext>();
         services.AddHostedService<MigrationService>();
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();

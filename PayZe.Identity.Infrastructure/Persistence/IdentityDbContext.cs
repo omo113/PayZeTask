@@ -28,3 +28,12 @@ public class IdentityDbContext : DbContext, IMigrationDbContext
     }
     public DbSet<Company> Companies { get; set; }
 }
+
+//var(hash, salt) = SecurityService.GenerateHash("VerySecret_Strong_System_Company_Secret");
+//var adminCompany = Company.CreateSystemCompany(
+//    "Admin Company",
+//    "Admin City",
+//    "admin@example.com",
+//    "admin-api-key",
+//    hash,
+//    salt);

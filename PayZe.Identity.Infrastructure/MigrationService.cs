@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PayZe.Identity.Infrastructure.Persistence;
 using PayZe.Shared.Abstractions;
 
 namespace PayZe.Identity.Infrastructure;
@@ -44,10 +45,9 @@ public class MigrationService : IHostedService
     private async Task RunMigration(CancellationToken cancellationToken)
     {
         using var scope = _scopeFactory.CreateScope();
-        var logger = scope.ServiceProvider.GetRequiredService<ILogger<MigrationService>>();
 
         var migrationContext = scope.ServiceProvider.GetRequiredService<IMigrationDbContext>();
-
+        await RunContextMigration(scope.ServiceProvider.GetRequiredService<IdentityDbContext>().Database, cancellationToken);
         await RunContextMigration(migrationContext.Database, cancellationToken);
     }
 

@@ -26,10 +26,6 @@ public class UnitOfWork : IUnitOfWork
                                .Select(x => x.Entity.PendingDomainEvents())
                                .SelectMany(x => x)
                                .ToList();
-        foreach (var aggregate in aggregates)
-        {
-            aggregate.Entity.IncreaseVersion();
-        }
 
         var domainEventPublishTasks = new List<Task>();
         foreach (var item in events)

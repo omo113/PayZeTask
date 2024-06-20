@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
+using MassTransit;
 using PayZe.Identity.Application.Dtos.CompanyDtos;
-using PayZe.Identity.Application.Services;
 using PayZe.Identity.Domain.Aggregates;
 using PayZe.Identity.Infrastructure.Repositories.Repositories.Abstractions;
 using PayZe.Identity.Infrastructure.UnitOfWork.Abstractions;
+using PayZe.Shared;
 using PayZe.Shared.ApplicationInfrastructure;
 
 namespace PayZe.Identity.Application.Commands.CompanyCommands;
@@ -32,24 +33,30 @@ public class CreateCompanyCommandValidator : AbstractValidator<CreateCompanyComm
 public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand, ApplicationResult<CompanyCreatedDto, ApplicationError>>
 {
     private readonly IRepository<Company> _repository;
-    private readonly SecurityService _securityService;
     private readonly IUnitOfWork _unitOfWork;
-    public CreateCompanyCommandHandler(IRepository<Company> repository, SecurityService securityService, IUnitOfWork unitOfWork)
+    private readonly IPublishEndpoint _publisher;
+    public CreateCompanyCommandHandler(IRepository<Company> repository, IUnitOfWork unitOfWork, IPublishEndpoint publisher)
     {
         _repository = repository;
-        _securityService = securityService;
         _unitOfWork = unitOfWork;
+        _publisher = publisher;
     }
 
     public async Task<ApplicationResult<CompanyCreatedDto, ApplicationError>> Handle(CreateCompanyCommand request, CancellationToken cancellationToken)
     {
-        var apiKey = _securityService.GenerateApiKey(request.Model.CompanyName);
-        var secret = _securityService.GenerateApiSecret();
+        var apiKey = SecurityService.GenerateApiKey(request.Model.CompanyName);
+        var secret = SecurityService.GenerateApiSecret();
 
-        var (hash, salt) = _securityService.GenerateHash(secret);
+        var (hash, salt) = SecurityService.GenerateHash(secret);
         var model = request.Model;
         var company = Company.CreateCompany(model.CompanyName, model.City, model.Email, apiKey, hash, salt);
         await _repository.Store(company);
+        //await _publisher.Publish(new CompanyCreatedEvent
+        //{
+        //    CompanyName = company.Name,
+        //    CreateDate = company.CreateDate,
+        //    UId = company.UId,
+        //});
         await _unitOfWork.SaveAsync();
         return new ApplicationResult<CompanyCreatedDto, ApplicationError>(
             new CompanyCreatedDto(company.Id, company.Name,

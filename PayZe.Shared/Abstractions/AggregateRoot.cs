@@ -4,16 +4,14 @@
     {
         private int Version { get; set; }
 
-        private List<DomainEvent> DomainEvents { get; } = new List<DomainEvent>();
+        private List<object> DomainEvents { get; } = new List<object>();
 
-        public IReadOnlyList<DomainEvent> PendingDomainEvents()
+        public IReadOnlyList<object> PendingDomainEvents()
         {
             return DomainEvents;
         }
-        protected virtual void Raise(DomainEvent @event)
+        protected virtual void Raise<T>(T @event) where T : DomainEvent
         {
-            @event.UId = UId;
-            @event.Version = Version;
             DomainEvents.Add(@event);
         }
     }

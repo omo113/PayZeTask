@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PayZe.Identity.Application\PayZe.Identity.Application.csproj" />
     <ProjectReference Include="..\PayZe.Identity.Infrastructure\PayZe.Identity.Infrastructure.csproj" />
   </ItemGroup>
 

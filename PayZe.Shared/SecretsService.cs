@@ -1,17 +1,17 @@
 ﻿using System.Security.Cryptography;
 
-namespace PayZe.Identity.Application.Services;
+namespace PayZe.Shared;
 
-public class SecurityService
+public static class SecurityService
 {
-    public string GenerateApiSecret()
+    public static string GenerateApiSecret()
     {
         var secretKey = new byte[32];
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(secretKey);
         return Convert.ToBase64String(secretKey);
     }
-    public string GenerateApiKey(string companyName)
+    public static string GenerateApiKey(string companyName)
     {
         byte[] secretKey = new byte[32];
         using (var rng = RandomNumberGenerator.Create())
@@ -20,7 +20,7 @@ public class SecurityService
         }
         return string.Concat(companyName, Guid.NewGuid());
     }
-    public (string Secret, string Salt) GenerateHash(string secret)
+    public static (string Secret, string Salt) GenerateHash(string secret)
     {
         var salt = new byte[16];
         using var rng = RandomNumberGenerator.Create();
@@ -33,7 +33,7 @@ public class SecurityService
 
     }
 
-    public bool CheckIfSecretHashEquals(string secret, string hashedSecret, string storedSalt)
+    public static bool CheckIfSecretHashEquals(string secret, string hashedSecret, string storedSalt)
     {
         var salt = Convert.FromBase64String(storedSalt);
 
