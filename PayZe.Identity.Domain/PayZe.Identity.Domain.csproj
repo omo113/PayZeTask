@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PayZe.Contracts\PayZe.Contracts.csproj" />
     <ProjectReference Include="..\PayZe.Shared\PayZe.Shared.csproj" />
   </ItemGroup>
 

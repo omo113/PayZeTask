@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using PayZe.Identity.Application.Behaviors;
+using PayZe.Identity.Application.Services;
 using System.Reflection;
 
 namespace PayZe.Identity.Application;
@@ -20,6 +21,7 @@ public static class DIExtension
             return true;
         });
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        services.AddTransient<SecurityService>();
         return services;
     }
 }

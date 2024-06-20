@@ -7,10 +7,10 @@ namespace PayZe.Identity.Infrastructure.UnitOfWork;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly CompanyIdentityDbContext _dbContext;
+    private readonly IdentityDbContext _dbContext;
     private readonly IPublishEndpoint _publishEndpoint;
 
-    public UnitOfWork(CompanyIdentityDbContext dbContext, IPublishEndpoint publishEndpoint)
+    public UnitOfWork(IdentityDbContext dbContext, IPublishEndpoint publishEndpoint)
     {
         _dbContext = dbContext;
         _publishEndpoint = publishEndpoint;

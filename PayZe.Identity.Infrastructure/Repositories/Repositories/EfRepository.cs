@@ -9,10 +9,10 @@ namespace PayZe.Identity.Infrastructure.Repositories.Repositories
     public class EfRepository<TEntity> : IRepository<TEntity>
         where TEntity : Entity
     {
-        private readonly CompanyIdentityDbContext _db;
+        private readonly IdentityDbContext _db;
         private readonly IQueryable<TEntity> _baseQuery;
 
-        public EfRepository(CompanyIdentityDbContext db, IServiceProvider serviceProvider)
+        public EfRepository(IdentityDbContext db, IServiceProvider serviceProvider)
         {
             _db = db;
             _baseQuery = _db.Set<TEntity>().AsQueryable();

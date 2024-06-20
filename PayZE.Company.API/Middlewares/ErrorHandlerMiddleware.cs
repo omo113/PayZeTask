@@ -1,5 +1,7 @@
 ﻿using System.Net;
 
+namespace PayZe.Identity.Api.Middlewares;
+
 public class ErrorHandlerMiddleware
 {
     private readonly RequestDelegate _next;
@@ -23,14 +25,14 @@ public class ErrorHandlerMiddleware
             {
                 case UnauthorizedAccessException:
                     context.RequestServices.GetRequiredService<ILoggerFactory>()
-                           .CreateLogger<ErrorHandlerMiddleware>()
-                           .LogError(ex, "");
+                        .CreateLogger<ErrorHandlerMiddleware>()
+                        .LogError(ex, "");
                     response.StatusCode = (int)HttpStatusCode.Forbidden;
                     break;
                 default:
                     context.RequestServices.GetRequiredService<ILoggerFactory>()
-                           .CreateLogger<ErrorHandlerMiddleware>()
-                           .LogError(ex, "");
+                        .CreateLogger<ErrorHandlerMiddleware>()
+                        .LogError(ex, "");
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     break;
             }

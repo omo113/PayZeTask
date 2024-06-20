@@ -1,8 +1,9 @@
-﻿using PayZe.Shared.Abstractions;
+﻿using PayZe.Contracts.Events;
+using PayZe.Shared.Abstractions;
 
 namespace PayZe.Identity.Domain.Aggregates;
 
-public class Company : AggregateRoot
+public sealed class Company : AggregateRoot
 {
     public string Name { get; private set; }
     public string ApiKey { get; private set; }
@@ -21,7 +22,11 @@ public class Company : AggregateRoot
         Email = email;
         City = city;
         Salt = salt;
-
+        Raise(new CompanyCreatedEvent
+        {
+            CompanyName = Name,
+            CreateDate = CreateDate,
+        });
     }
     public static Company CreateCompany(string name, string city, string email, string apiKey, string hashedSecret, string salt)
     {

@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PayZe.Identity.Application\PayZe.Identity.Application.csproj" />
     <ProjectReference Include="..\PayZe.Identity.Infrastructure\PayZe.Identity.Infrastructure.csproj" />
+    <ProjectReference Include="..\PayZe.Identity.RabbitMq\PayZe.Identity.RabbitMq.csproj" />
   </ItemGroup>
 
 </Project>

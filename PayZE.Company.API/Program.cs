@@ -1,9 +1,17 @@
+using PayZe.Identity.Api.Middlewares;
 using PayZe.Identity.Application;
 using PayZe.Identity.Infrastructure;
+using PayZe.Identity.RabbitMq;
+using PayZe.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(c => { c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
+builder
+    .Host
+    .AddSettingsConfiguration()
+    .ConfigureMessageBus();
+
 builder.Services.AddDbContext(builder.Configuration);
 builder.Services.AddApplication();
 

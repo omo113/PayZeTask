@@ -1,40 +1,47 @@
 ﻿using MassTransit;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using PayZe.Identity.Infrastructure.Persistence;
+using PayZe.Shared.Settings;
 
 namespace PayZe.Identity.RabbitMq;
 
 public static class DIExtension
 {
-    public static IServiceCollection ConfigureMessageBus(this IServiceCollection services, IConfiguration configuration)
+    public static IHostBuilder ConfigureMessageBus(this IHostBuilder builder)
     {
-        services.AddMassTransit(x =>
+        builder.ConfigureServices((hostContext, sc) =>
         {
-            x.AddEntityFrameworkOutbox<CompanyIdentityDbContext>(o =>
+            sc.AddMassTransit((x) =>
             {
-                o.QueryDelay = TimeSpan.FromSeconds(10);
-                o.UsePostgres();
-                o.UseBusOutbox();
-            });
-            x.UsingRabbitMq((context, cfg) =>
-            {
-                cfg.UseMessageRetry(r =>
+                x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("identity", false));
+                x.AddEntityFrameworkOutbox<IdentityDbContext>(o =>
                 {
-                    r.Handle<RabbitMqConnectionException>();
-                    r.Interval(3, TimeSpan.FromSeconds(10));
+                    o.QueryDelay = TimeSpan.FromSeconds(10);
+                    o.UsePostgres();
+                    o.UseBusOutbox();
+                });
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.UseMessageRetry(r =>
+                    {
+                        r.Handle<RabbitMqConnectionException>();
+                        r.Interval(3, TimeSpan.FromSeconds(10));
+                    });
+                    var environmentSettings = context.GetRequiredService<IOptions<EnvironmentSettings>>().Value;
+                    cfg.Host(environmentSettings.RabbitMqHost, "/", host =>
+                    {
+                        host.Username(environmentSettings.RabbitMqUser);
+                        host.Password(environmentSettings.RabbitMqPassword);
+                    });
+                    cfg.ConfigureEndpoints(context);
+
                 });
 
-                cfg.Host(configuration["RabbitMq:Host"], "/", host =>
-                {
-                    host.Username(configuration.GetSection("RabbitMq:Username").Value!);
-                    host.Password(configuration.GetSection("RabbitMq:Password").Value!);
-                });
-                cfg.ConfigureEndpoints(context);
-
             });
-
         });
-        return services;
+
+        return builder;
     }
 }

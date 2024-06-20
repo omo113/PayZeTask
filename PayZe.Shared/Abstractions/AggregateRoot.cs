@@ -10,14 +10,8 @@
         {
             return DomainEvents;
         }
-        public virtual void IncreaseVersion()
-        {
-            Version++;
-        }
         protected virtual void Raise(DomainEvent @event)
         {
-            Version++;
-
             @event.UId = UId;
             @event.Version = Version;
             DomainEvents.Add(@event);
