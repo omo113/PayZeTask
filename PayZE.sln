@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Orders.Api", "PayZe.O
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Orders.Domain", "PayZe.Orders.Domain\PayZe.Orders.Domain.csproj", "{E7C5D976-3DD9-40E0-A722-58D31ECBBFCB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{0D8E8DF1-B0EB-4DE4-997E-86768E59D2C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

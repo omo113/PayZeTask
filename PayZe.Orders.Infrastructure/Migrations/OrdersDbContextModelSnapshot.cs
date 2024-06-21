@@ -252,6 +252,9 @@ namespace PayZe.Orders.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("UId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")

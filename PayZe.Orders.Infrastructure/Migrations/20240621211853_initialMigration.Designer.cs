@@ -12,7 +12,7 @@ using PayZe.Orders.Infrastructure.Persistence;
 namespace PayZe.Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20240621202323_initialMigration")]
+    [Migration("20240621211853_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />
@@ -254,6 +254,9 @@ namespace PayZe.Orders.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("LastChangeDate")
                         .IsConcurrencyToken()
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("UId")
                         .ValueGeneratedOnAdd()

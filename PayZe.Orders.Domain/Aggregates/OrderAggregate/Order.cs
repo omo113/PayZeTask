@@ -9,7 +9,7 @@ public class Order : AggregateRoot
     public Company Company { get; private set; }
     public decimal Amount { get; private set; }
     public string Currency { get; private set; }
-
+    public OrderStatus OrderStatus { get; private set; }
     private Order()
     {
 
@@ -19,6 +19,7 @@ public class Order : AggregateRoot
         Company = company;
         Amount = amount;
         Currency = currency;
+        OrderStatus = OrderStatus.Processing;
     }
 
     public static Order CreateOrder(Company company, decimal amount, string currency)

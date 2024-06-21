@@ -12,7 +12,6 @@ internal class OrdersConfiguration : EntityConfiguration<Order>
         builder.ToTable("Orders").HasKey(x => x.Id);
         builder.HasAlternateKey(x => x.UId);
         builder.Property(x => x.UId).HasDefaultValueSql("gen_random_uuid()");
-
         builder.HasOne(x => x.Company)
             .WithMany(x => x.Orders)
             .HasForeignKey(x => x.CompanyId);

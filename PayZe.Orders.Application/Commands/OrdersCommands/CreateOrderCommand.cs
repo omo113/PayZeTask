@@ -15,7 +15,7 @@ public record CreateOrderCommand(OrderDto Model) : IRequest<ApplicationResult<Od
 
 public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
 {
-    public CreateOrderCommandValidator(IRepository<Company> companyRepository, CurrencyDictionary currencyDictionary)
+    public CreateOrderCommandValidator(IRepository<Company> companyRepository, IRepository<Order> orderRepository, CurrencyDictionary currencyDictionary)
     {
         RuleFor(x => x.Model.Currency)
             .NotEmpty()
@@ -36,7 +36,26 @@ public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
             {
                 return await companyRepository.Query(x => x.UId == compId).AnyAsync();
             })
-            .WithMessage("this kind of company does not exist");
+            .WithMessage("this kind of company does not exist")
+            .DependentRules(() =>
+            {
+                RuleFor(x => x)
+                    .MustAsync(async (x, token) =>
+                    {
+                        var company = await companyRepository.Query(comp => comp.UId == x.Model.CompanyId).FirstAsync();
+                        var amount = await orderRepository.Query(ord => ord.CompanyId == company.Id)
+                             .Where(order => order.OrderStatus != OrderStatus.Failed && order.CreateDate.Date == SystemDate.Now)
+                             .SumAsync(order => order.Amount);
+                        if (amount + x.Model.Amount > 10_000)
+                        {
+                            return false;
+                        }
+
+                        return true;
+                    })
+                    .WithMessage("daily order per company can't exceed 10,000");
+
+            });
     }
 }
 

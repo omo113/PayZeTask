@@ -110,6 +110,7 @@ namespace PayZe.Orders.Infrastructure.Migrations
                     CompanyId = table.Column<int>(type: "integer", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
                     Currency = table.Column<string>(type: "text", nullable: false),
+                    OrderStatus = table.Column<int>(type: "integer", nullable: false),
                     UId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     EntityStatus = table.Column<int>(type: "integer", nullable: false),
                     CreateDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
