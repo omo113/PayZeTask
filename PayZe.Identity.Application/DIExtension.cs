@@ -20,6 +20,7 @@ public static class DIExtension
             return true;
         });
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        services.AddGrpc();
         return services;
     }
 }

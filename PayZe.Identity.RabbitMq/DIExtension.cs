@@ -2,9 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using PayZe.Identity.Application.Consumers;
 using PayZe.Identity.Infrastructure.Persistence;
 using PayZe.Shared.Settings;
+
+namespace PayZe.Identity.RabbitMq;
 
 public static class DIExtension
 {
@@ -14,7 +15,6 @@ public static class DIExtension
         {
             sc.AddMassTransit((x) =>
             {
-                x.AddConsumersFromNamespaceContaining<CompanyCreatedConsumer>();
                 x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("identity", false));
 
                 // Configure outbox for message retry

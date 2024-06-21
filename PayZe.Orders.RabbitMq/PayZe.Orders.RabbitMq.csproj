@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.2.3" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\PayZe.Orders.Application\PayZe.Orders.Application.csproj" />
+	  <ProjectReference Include="..\PayZe.Orders.Infrastructure\PayZe.Orders.Infrastructure.csproj" />
+	  <ProjectReference Include="..\PayZe.Shared\PayZe.Shared.csproj" />
+	</ItemGroup>
+
+</Project>

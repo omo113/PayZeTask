@@ -1,6 +1,8 @@
 ﻿using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using PayZe.Identity.Domain.Aggregates;
+using PayZe.Identity.Domain.Aggregates.CompanyAggregate;
+using PayZe.Identity.Infrastructure.Persistence.Configurations;
+using PayZe.Identity.Infrastructure.Persistence.Configurations.Infrastructure;
 using PayZe.Shared.Abstractions;
 
 namespace PayZe.Identity.Infrastructure.Persistence;
@@ -25,15 +27,9 @@ public class IdentityDbContext : DbContext, IMigrationDbContext
         builder.AddInboxStateEntity();
         builder.AddOutboxMessageEntity();
         builder.AddOutboxStateEntity();
+
+        builder.AddConfiguration(new CompanyConfiguration());
+
     }
     public DbSet<Company> Companies { get; set; }
 }
-
-//var(hash, salt) = SecurityService.GenerateHash("VerySecret_Strong_System_Company_Secret");
-//var adminCompany = Company.CreateSystemCompany(
-//    "Admin Company",
-//    "Admin City",
-//    "admin@example.com",
-//    "admin-api-key",
-//    hash,
-//    salt);

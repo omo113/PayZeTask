@@ -24,7 +24,7 @@ namespace PayZe.Identity.Infrastructure.Migrations
                     Salt = table.Column<string>(type: "text", nullable: false),
                     City = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
-                    UId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     EntityStatus = table.Column<int>(type: "integer", nullable: false),
                     CreateDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     LastChangeDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
@@ -32,6 +32,7 @@ namespace PayZe.Identity.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Companies", x => x.Id);
+                    table.UniqueConstraint("AK_Companies_UId", x => x.UId);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,6 +105,11 @@ namespace PayZe.Identity.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_OutboxState", x => x.OutboxId);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "API_KEY_INDEX",
+                table: "Companies",
+                column: "ApiKey");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InboxState_Delivered",

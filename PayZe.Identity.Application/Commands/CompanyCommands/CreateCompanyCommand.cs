@@ -2,7 +2,7 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using PayZe.Identity.Application.Dtos.CompanyDtos;
-using PayZe.Identity.Domain.Aggregates;
+using PayZe.Identity.Domain.Aggregates.CompanyAggregate;
 using PayZe.Identity.Infrastructure.Repositories.Repositories.Abstractions;
 using PayZe.Identity.Infrastructure.UnitOfWork.Abstractions;
 using PayZe.Shared;

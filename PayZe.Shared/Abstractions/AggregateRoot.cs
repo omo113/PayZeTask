@@ -12,6 +12,7 @@
         }
         protected virtual void Raise<T>(T @event) where T : DomainEvent
         {
+            @event.UId = UId;
             DomainEvents.Add(@event);
         }
     }

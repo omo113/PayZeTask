@@ -10,7 +10,7 @@ public class EnvironmentSettings
     public string RabbitMqHost { get; set; }
     public string RabbitMqPassword { get; set; }
     public string RabbitMqUser { get; set; }
-
+    public string RedisConnectionString { get; set; }
     public void ValidateAndThrow()
     {
         _validator.ValidateAndThrow(this);
@@ -33,6 +33,8 @@ public class EnvironmentSettingsValidator : AbstractValidator<EnvironmentSetting
         RuleFor(x => x.RabbitMqUser)
             .NotNull()
             .NotEmpty();
-
+        RuleFor(x => x.RedisConnectionString)
+            .NotNull()
+            .NotEmpty();
     }
 }

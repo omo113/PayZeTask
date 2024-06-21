@@ -3,21 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Shared", "PayZe.Shared\PayZe.Shared.csproj", "{B768E67A-D8A6-4ED3-8E6F-16F22E73C837}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Shared", "PayZe.Shared\PayZe.Shared.csproj", "{B768E67A-D8A6-4ED3-8E6F-16F22E73C837}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Identity.Api", "PayZE.Company.API\PayZe.Identity.Api.csproj", "{7D4CE680-9350-4FFD-A509-9FD8FF9FC848}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Identity.Api", "PayZE.Company.API\PayZe.Identity.Api.csproj", "{7D4CE680-9350-4FFD-A509-9FD8FF9FC848}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{D0AA103F-FDC0-4B1A-B52F-75AF6BACB1AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Identity.Application", "PayZe.Identity.Application\PayZe.Identity.Application.csproj", "{2A4FC432-7D01-4154-8052-98D07AB0A741}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Identity.Application", "PayZe.Identity.Application\PayZe.Identity.Application.csproj", "{2A4FC432-7D01-4154-8052-98D07AB0A741}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Identity.Infrastructure", "PayZe.Identity.Infrastructure\PayZe.Identity.Infrastructure.csproj", "{32F5B798-1066-4FFC-8E4B-796B81CE48F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Identity.Infrastructure", "PayZe.Identity.Infrastructure\PayZe.Identity.Infrastructure.csproj", "{32F5B798-1066-4FFC-8E4B-796B81CE48F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Identity.Domain", "PayZe.Identity.Domain\PayZe.Identity.Domain.csproj", "{778ACD59-C8B1-413D-8174-723736677489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Identity.Domain", "PayZe.Identity.Domain\PayZe.Identity.Domain.csproj", "{778ACD59-C8B1-413D-8174-723736677489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Identity.RabbitMq", "PayZe.Identity.RabbitMq\PayZe.Identity.RabbitMq.csproj", "{10031A25-D39B-458C-882C-FD2986BF1E0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Identity.RabbitMq", "PayZe.Identity.RabbitMq\PayZe.Identity.RabbitMq.csproj", "{10031A25-D39B-458C-882C-FD2986BF1E0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Contracts", "PayZe.Contracts\PayZe.Contracts.csproj", "{A489F471-8E7B-4590-A390-4A2F8729F5CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Contracts", "PayZe.Contracts\PayZe.Contracts.csproj", "{A489F471-8E7B-4590-A390-4A2F8729F5CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{FBD5043F-CF50-4266-92C6-80AAE81D6077}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Orders.RabbitMq", "PayZe.Orders.RabbitMq\PayZe.Orders.RabbitMq.csproj", "{EF6257CA-FF9C-4668-95EF-1711560696E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Orders.Infrastructure", "PayZe.Orders.Infrastructure\PayZe.Orders.Infrastructure.csproj", "{1A212298-7A1C-4FEF-8B97-ADD3F21BA6FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Orders.Application", "PayZe.Orders.Application\PayZe.Orders.Application.csproj", "{81E7F859-C426-4B22-A366-D69312288782}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Orders.Api", "PayZe.Orders.Api\PayZe.Orders.Api.csproj", "{F8A16FA4-9E5D-481D-BE26-AC818AA8FC07}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Orders.Domain", "PayZe.Orders.Domain\PayZe.Orders.Domain.csproj", "{E7C5D976-3DD9-40E0-A722-58D31ECBBFCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +65,26 @@ Global
 		{A489F471-8E7B-4590-A390-4A2F8729F5CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A489F471-8E7B-4590-A390-4A2F8729F5CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A489F471-8E7B-4590-A390-4A2F8729F5CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF6257CA-FF9C-4668-95EF-1711560696E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF6257CA-FF9C-4668-95EF-1711560696E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF6257CA-FF9C-4668-95EF-1711560696E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF6257CA-FF9C-4668-95EF-1711560696E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A212298-7A1C-4FEF-8B97-ADD3F21BA6FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A212298-7A1C-4FEF-8B97-ADD3F21BA6FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A212298-7A1C-4FEF-8B97-ADD3F21BA6FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A212298-7A1C-4FEF-8B97-ADD3F21BA6FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81E7F859-C426-4B22-A366-D69312288782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81E7F859-C426-4B22-A366-D69312288782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81E7F859-C426-4B22-A366-D69312288782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81E7F859-C426-4B22-A366-D69312288782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8A16FA4-9E5D-481D-BE26-AC818AA8FC07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8A16FA4-9E5D-481D-BE26-AC818AA8FC07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8A16FA4-9E5D-481D-BE26-AC818AA8FC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8A16FA4-9E5D-481D-BE26-AC818AA8FC07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7C5D976-3DD9-40E0-A722-58D31ECBBFCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7C5D976-3DD9-40E0-A722-58D31ECBBFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7C5D976-3DD9-40E0-A722-58D31ECBBFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7C5D976-3DD9-40E0-A722-58D31ECBBFCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +95,11 @@ Global
 		{32F5B798-1066-4FFC-8E4B-796B81CE48F5} = {D0AA103F-FDC0-4B1A-B52F-75AF6BACB1AD}
 		{778ACD59-C8B1-413D-8174-723736677489} = {D0AA103F-FDC0-4B1A-B52F-75AF6BACB1AD}
 		{10031A25-D39B-458C-882C-FD2986BF1E0B} = {D0AA103F-FDC0-4B1A-B52F-75AF6BACB1AD}
+		{EF6257CA-FF9C-4668-95EF-1711560696E0} = {FBD5043F-CF50-4266-92C6-80AAE81D6077}
+		{1A212298-7A1C-4FEF-8B97-ADD3F21BA6FA} = {FBD5043F-CF50-4266-92C6-80AAE81D6077}
+		{81E7F859-C426-4B22-A366-D69312288782} = {FBD5043F-CF50-4266-92C6-80AAE81D6077}
+		{F8A16FA4-9E5D-481D-BE26-AC818AA8FC07} = {FBD5043F-CF50-4266-92C6-80AAE81D6077}
+		{E7C5D976-3DD9-40E0-A722-58D31ECBBFCB} = {FBD5043F-CF50-4266-92C6-80AAE81D6077}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16C34339-8B00-4C0A-8452-14F380C7E32D}

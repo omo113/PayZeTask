@@ -10,7 +10,8 @@
         "settings__RabbitMqHost": "localhost",
         "settings__RabbitMqUser": "admin",
         "settings__RabbitMqPassword": "admin",
-        "settings__DatabaseConnection": "Host=localhost; Database=dotnet-PayZe-Identity; Username=myuser; Password=mypassword;Pooling=true;"
+        "settings__DatabaseConnection": "Host=localhost; Database=dotnet-PayZe-Identity; Username=myuser; Password=mypassword;Pooling=true;",
+        "settings__RedisConnectionString": "localhost:6379"
       },
       "applicationUrl": "https://localhost:7259"
     }

@@ -2,21 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using PayZe.Identity.Infrastructure.Persistence;
+using PayZe.Orders.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace PayZe.Identity.Infrastructure.Migrations
+namespace PayZe.Orders.Infrastructure.Migrations
 {
-    [DbContext(typeof(IdentityDbContext))]
-    [Migration("20240621154337_initialMigration")]
-    partial class initialMigration
+    [DbContext(typeof(OrdersDbContext))]
+    partial class OrdersDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,7 +192,7 @@ namespace PayZe.Identity.Infrastructure.Migrations
                     b.ToTable("OutboxState");
                 });
 
-            modelBuilder.Entity("PayZe.Identity.Domain.Aggregates.Company", b =>
+            modelBuilder.Entity("PayZe.Orders.Domain.Aggregates.CompanyAggregate.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -203,27 +200,11 @@ namespace PayZe.Identity.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApiKey")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTimeOffset>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("EntityStatus")
                         .HasColumnType("integer");
-
-                    b.Property<string>("HashedSecret")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("LastChangeDate")
                         .IsConcurrencyToken()
@@ -233,16 +214,72 @@ namespace PayZe.Identity.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Salt")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<Guid>("UId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Companies");
+                    b.HasAlternateKey("UId");
+
+                    b.ToTable("Companies", (string)null);
+                });
+
+            modelBuilder.Entity("PayZe.Orders.Domain.Aggregates.OrderAggregate.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("EntityStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset?>("LastChangeDate")
+                        .IsConcurrencyToken()
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("UId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Orders", (string)null);
+                });
+
+            modelBuilder.Entity("PayZe.Orders.Domain.Aggregates.OrderAggregate.Order", b =>
+                {
+                    b.HasOne("PayZe.Orders.Domain.Aggregates.CompanyAggregate.Company", "Company")
+                        .WithMany("Orders")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("PayZe.Orders.Domain.Aggregates.CompanyAggregate.Company", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

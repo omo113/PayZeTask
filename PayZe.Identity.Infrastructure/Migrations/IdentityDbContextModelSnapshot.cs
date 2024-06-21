@@ -192,7 +192,7 @@ namespace PayZe.Identity.Infrastructure.Migrations
                     b.ToTable("OutboxState");
                 });
 
-            modelBuilder.Entity("PayZe.Identity.Domain.Aggregates.Company", b =>
+            modelBuilder.Entity("PayZe.Identity.Domain.Aggregates.CompanyAggregate.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -235,11 +235,18 @@ namespace PayZe.Identity.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid>("UId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Companies");
+                    b.HasAlternateKey("UId");
+
+                    b.HasIndex("ApiKey")
+                        .HasDatabaseName("API_KEY_INDEX");
+
+                    b.ToTable("Companies", (string)null);
                 });
 #pragma warning restore 612, 618
         }

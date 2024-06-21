@@ -1,7 +1,7 @@
 ﻿using PayZe.Contracts.Events;
 using PayZe.Shared.Abstractions;
 
-namespace PayZe.Identity.Domain.Aggregates;
+namespace PayZe.Identity.Domain.Aggregates.CompanyAggregate;
 
 public sealed class Company : AggregateRoot
 {
