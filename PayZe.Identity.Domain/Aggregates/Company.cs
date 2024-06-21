@@ -11,7 +11,6 @@ public sealed class Company : AggregateRoot
     public string Salt { get; private set; }
     public string City { get; private set; }
     public string Email { get; private set; }
-    public bool IsSystemCompany { get; private set; }
 
     private Company(string name, string city, string email, string apiKey, string hashedSecret, string salt)
     {
@@ -31,12 +30,5 @@ public sealed class Company : AggregateRoot
     public static Company CreateCompany(string name, string city, string email, string apiKey, string hashedSecret, string salt)
     {
         return new Company(name, city, email, apiKey, hashedSecret, salt);
-    }
-    public static Company CreateSystemCompany(string name, string city, string email, string apiKey, string hashedSecret, string salt)
-    {
-        return new Company(name, city, email, apiKey, hashedSecret, salt)
-        {
-            IsSystemCompany = true
-        };
     }
 }

@@ -222,9 +222,6 @@ namespace PayZe.Identity.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("IsSystemCompany")
-                        .HasColumnType("boolean");
-
                     b.Property<DateTimeOffset?>("LastChangeDate")
                         .IsConcurrencyToken()
                         .HasColumnType("timestamp with time zone");

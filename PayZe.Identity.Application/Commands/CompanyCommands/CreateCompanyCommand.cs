@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using PayZe.Identity.Application.Dtos.CompanyDtos;
 using PayZe.Identity.Domain.Aggregates;
 using PayZe.Identity.Infrastructure.Repositories.Repositories.Abstractions;
@@ -14,11 +15,16 @@ public record CreateCompanyCommand(CompanyDto Model) : IRequest<ApplicationResul
 
 public class CreateCompanyCommandValidator : AbstractValidator<CreateCompanyCommand>
 {
-    public CreateCompanyCommandValidator()
+    public CreateCompanyCommandValidator(IRepository<Company> repository)
     {
         RuleFor(x => x.Model.CompanyName)
             .NotNull()
-            .NotEmpty();
+            .NotEmpty()
+            .MustAsync(async (name, cancellationToken) =>
+            {
+                return !await repository.Query(comp => comp.Name == name).AnyAsync(cancellationToken);
+            })
+            .WithMessage("company with this name already exists");
         RuleFor(x => x.Model.City)
             .NotEmpty()
             .NotNull();
@@ -51,16 +57,10 @@ public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand,
         var model = request.Model;
         var company = Company.CreateCompany(model.CompanyName, model.City, model.Email, apiKey, hash, salt);
         await _repository.Store(company);
-        //await _publisher.Publish(new CompanyCreatedEvent
-        //{
-        //    CompanyName = company.Name,
-        //    CreateDate = company.CreateDate,
-        //    UId = company.UId,
-        //});
         await _unitOfWork.SaveAsync();
         return new ApplicationResult<CompanyCreatedDto, ApplicationError>(
             new CompanyCreatedDto(company.Id, company.Name,
                 company.City, company.Email, company.ApiKey,
-                company.HashedSecret, company.CreateDate));
+                secret, company.CreateDate));
     }
 }

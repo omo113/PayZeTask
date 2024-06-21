@@ -12,7 +12,7 @@ using PayZe.Identity.Infrastructure.Persistence;
 namespace PayZe.Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20240620215817_initialMigration")]
+    [Migration("20240621154337_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />
@@ -224,9 +224,6 @@ namespace PayZe.Identity.Infrastructure.Migrations
                     b.Property<string>("HashedSecret")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<bool>("IsSystemCompany")
-                        .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset?>("LastChangeDate")
                         .IsConcurrencyToken()

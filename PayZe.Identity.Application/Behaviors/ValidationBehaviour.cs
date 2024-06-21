@@ -33,7 +33,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
             if (failures.Any())
             {
                 var validationErrors = new ApplicationError(
-                    failures.Select(x => new Error(x.ErrorCode, x.ErrorMessage)).ToList()
+                    failures.Select(x => new Error(x.PropertyName, x.ErrorMessage)).ToList()
                 );
 
                 var responseType = typeof(TResponse);

@@ -24,7 +24,6 @@ namespace PayZe.Identity.Infrastructure.Migrations
                     Salt = table.Column<string>(type: "text", nullable: false),
                     City = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
-                    IsSystemCompany = table.Column<bool>(type: "boolean", nullable: false),
                     UId = table.Column<Guid>(type: "uuid", nullable: false),
                     EntityStatus = table.Column<int>(type: "integer", nullable: false),
                     CreateDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),

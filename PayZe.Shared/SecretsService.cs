@@ -18,7 +18,7 @@ public static class SecurityService
         {
             rng.GetBytes(secretKey);
         }
-        return string.Concat(companyName, Guid.NewGuid());
+        return string.Concat(companyName, '-', Guid.NewGuid());
     }
     public static (string Secret, string Salt) GenerateHash(string secret)
     {
@@ -33,7 +33,7 @@ public static class SecurityService
 
     }
 
-    public static bool CheckIfSecretHashEquals(string secret, string hashedSecret, string storedSalt)
+    public static bool SecretEqualsHash(string secret, string hashedSecret, string storedSalt)
     {
         var salt = Convert.FromBase64String(storedSalt);
 

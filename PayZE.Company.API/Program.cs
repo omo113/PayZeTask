@@ -1,9 +1,14 @@
+using PayZe.Identity.Api;
 using PayZe.Identity.Api.Middlewares;
 using PayZe.Identity.Application;
 using PayZe.Identity.Infrastructure;
 using PayZe.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services
+    .AddTransient<IHttpContextAccessor, HttpContextAccessor>()
+    .AddScoped(ApplicationContextFactory.Create);
 
 builder.Services.AddCors(c => { c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
 builder.Services.AddApplication();
@@ -14,7 +19,7 @@ builder
     .ConfigureMessageBus();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerSettings();
 var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
@@ -28,8 +33,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
 app.MapControllers();
+
+app.UseMiddleware<AuthorizationMiddleware>();
 
 app.Run();
