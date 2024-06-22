@@ -12,7 +12,6 @@
 
     public record Query
     {
-        public string? Search { get; set; }
         public required int PageIndex { get; init; }
         public required int PageSize { get; init; }
     }

@@ -7,7 +7,10 @@ public class Order : Entity
     public string Currency { get; set; }
     public decimal Amount { get; set; }
 
+    private Order()
+    {
 
+    }
     private Order(Guid id, string currency, decimal amount)
     {
         Currency = currency;

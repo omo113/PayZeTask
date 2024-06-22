@@ -17,6 +17,10 @@ public sealed class Payment : AggregateRoot
     public string? PaymentErrorMessage { get; private set; }
     public DateTimeOffset ResponseDate { get; private set; }
 
+    private Payment()
+    {
+
+    }
     private Payment(Order order, string cardNumber, DateOnly expiryDate, ProcessingService processingService, OrderStatus status)
     {
         UId = Guid.NewGuid();

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PayZe.Orders.Application.Commands.OrdersCommands;
-using PayZe.Orders.Application.Dtos.OrdersDtos;
 using PayZe.Payment.Api.Abstractions;
+using PayZe.Payment.Application.Commands.PaymentCommands;
+using PayZe.Payment.Application.Dtos.PaymentDtos;
 
 namespace PayZe.Payment.Api.Controllers;
 
@@ -16,10 +16,10 @@ public class PaymentController : ApiControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateCompanyAsync([FromBody] OrderDto request)
+    [HttpPost("{orderId:guid}")]
+    public async Task<IActionResult> CreateCompanyAsync([FromRoute] Guid orderId, PaymentDto model)
     {
 
-        return (await _mediator.Send(new CreateOrderCommand(request))).Match(Ok, error => BadRequest(error) as IActionResult);
+        return (await _mediator.Send(new CreatePaymentCommand(orderId, model))).Match(Ok, error => BadRequest(error) as IActionResult);
     }
 }

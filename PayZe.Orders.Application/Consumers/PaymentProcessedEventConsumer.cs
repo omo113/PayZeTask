@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using PayZe.Contracts.Events;
 using PayZe.Orders.Domain.Aggregates.OrderAggregate;
 using PayZe.Orders.Infrastructure.Repositories.Repositories.Abstractions;
@@ -16,8 +17,11 @@ public class PaymentProcessedEventConsumer : IConsumer<PaymentProcessedEvent>
         _unitOfWork = unitOfWork;
     }
 
-    public Task Consume(ConsumeContext<PaymentProcessedEvent> context)
+    public async Task Consume(ConsumeContext<PaymentProcessedEvent> context)
     {
-        throw new NotImplementedException();
+        var order = await _orderRepository.Query(x => x.UId == context.Message.OrderId)
+            .FirstAsync();
+        order.UpdateOrderStatus(context.Message.Status, context.Message.PaymentErrorMessage);
+        await _unitOfWork.SaveAsync();
     }
 }

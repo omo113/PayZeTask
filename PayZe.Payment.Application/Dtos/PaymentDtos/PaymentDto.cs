@@ -1,3 +1,3 @@
 ﻿namespace PayZe.Payment.Application.Dtos.PaymentDtos;
 
-public record PaymentDto(DateOnly ExpiryDate, string CardNumber, Guid OrderId);
+public record PaymentDto(DateTimeOffset ExpiryDate, string CardNumber);

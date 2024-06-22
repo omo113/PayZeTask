@@ -28,10 +28,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-        <Folder Include="Queries\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\PayZe.Contracts\PayZe.Contracts.csproj" />
 	  <ProjectReference Include="..\PayZe.Orders.Domain\PayZe.Orders.Domain.csproj" />
 	  <ProjectReference Include="..\PayZe.Orders.Infrastructure\PayZe.Orders.Infrastructure.csproj" />

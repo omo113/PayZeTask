@@ -1,5 +1,6 @@
 ﻿using PayZe.Contracts.Events;
 using PayZe.Orders.Domain.Aggregates.CompanyAggregate;
+using PayZe.Shared;
 using PayZe.Shared.Abstractions;
 using PayZe.Shared.Enums;
 
@@ -19,6 +20,7 @@ public sealed class Order : AggregateRoot
     }
     private Order(Company company, decimal amount, string currency)
     {
+        UId = Guid.NewGuid();
         Company = company;
         Amount = amount;
         Currency = currency;
@@ -34,5 +36,12 @@ public sealed class Order : AggregateRoot
     public static Order CreateOrder(Company company, decimal amount, string currency)
     {
         return new Order(company, amount, currency);
+    }
+
+    public void UpdateOrderStatus(OrderStatus orderStatus, string? paymentErrorMessage)
+    {
+        OrderStatus = orderStatus;
+        PaymentErrorMessage = paymentErrorMessage;
+        LastChangeDate = SystemDate.Now;
     }
 }

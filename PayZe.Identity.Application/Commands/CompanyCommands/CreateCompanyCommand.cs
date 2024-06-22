@@ -59,7 +59,7 @@ public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand,
         await _repository.Store(company);
         await _unitOfWork.SaveAsync();
         return new ApplicationResult<CompanyCreatedDto, ApplicationError>(
-            new CompanyCreatedDto(company.Id, company.Name,
+            new CompanyCreatedDto(company.UId, company.Name,
                 company.City, company.Email, company.ApiKey,
                 secret, company.CreateDate));
     }

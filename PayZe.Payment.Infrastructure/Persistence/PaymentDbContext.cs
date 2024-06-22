@@ -17,7 +17,7 @@ public class PaymentDbContext : DbContext, IMigrationDbContext
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("Host=localhost; Database=dotnet-PayZe-CompanyIdentity; Username=myuser; Password=mypassword;Pooling=true;");
+        optionsBuilder.UseNpgsql("Host=localhost; Database=dotnet-PayZe-Payment; Username=myuser; Password=mypassword;Pooling=true;");
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
