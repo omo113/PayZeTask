@@ -3,7 +3,6 @@
     public enum EntityStatus
     {
         Deleted,
-        Active,
-        Locked
+        Active
     }
 }

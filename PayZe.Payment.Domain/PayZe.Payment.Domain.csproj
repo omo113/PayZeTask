@@ -11,5 +11,4 @@
     <ProjectReference Include="..\PayZe.Shared\PayZe.Shared.csproj" />
   </ItemGroup>
 
-
 </Project>

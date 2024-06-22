@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="11.9.2" />
+		<PackageReference Include="MassTransit.Abstractions" Version="8.2.3" />
+		<PackageReference Include="MediatR" Version="12.3.0" />
+		<PackageReference Include="Google.Protobuf" Version="3.26.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.63.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.64.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\PayZe.Contracts\PayZe.Contracts.csproj" />
+		<ProjectReference Include="..\PayZe.Payment.Domain\PayZe.Payment.Domain.csproj" />
+		<ProjectReference Include="..\PayZe.Payment.Infrastructure\PayZe.Payment.Infrastructure.csproj" />
+		<ProjectReference Include="..\PayZe.Shared\PayZe.Shared.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Protobuf Include="protos\company.proto" GrpcServices="Client" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Queries\" />
+	</ItemGroup>
+</Project>

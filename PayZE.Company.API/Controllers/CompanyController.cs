@@ -9,7 +9,6 @@ namespace PayZe.Identity.Api.Controllers;
 
 
 [Route("api/company")]
-[ApiController]
 public class CompanyController : ApiControllerBase
 {
     private readonly IMediator _mediator;

@@ -7,6 +7,7 @@ using PayZe.Orders.Infrastructure.Repositories.Repositories.Abstractions;
 using PayZe.Orders.Infrastructure.UnitOfWork.Abstractions;
 using PayZe.Shared;
 using PayZe.Shared.ApplicationInfrastructure;
+using PayZe.Shared.Enums;
 
 namespace PayZe.Orders.Application.Commands.OrdersCommands;
 
@@ -36,7 +37,7 @@ public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
             {
                 return await companyRepository.Query(x => x.UId == compId).AnyAsync();
             })
-            .WithMessage("this kind of company does not exist")
+            .WithMessage("this kind of company does not exist in this service yet")
             .DependentRules(() =>
             {
                 RuleFor(x => x)

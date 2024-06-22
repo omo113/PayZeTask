@@ -3,7 +3,7 @@ using PayZe.Shared.Abstractions;
 
 namespace PayZe.Orders.Domain.Aggregates.CompanyAggregate;
 
-public class Company : AggregateRoot
+public class Company : Entity
 {
     public string Name { get; private set; }
     private readonly List<OrderAggregate.Order> _orders = new();

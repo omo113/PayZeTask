@@ -1,4 +1,4 @@
-﻿namespace PayZe.Orders.Domain.Aggregates.OrderAggregate;
+﻿namespace PayZe.Shared.Enums;
 
 public enum OrderStatus
 {

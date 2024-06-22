@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PayZe.Orders.Application\PayZe.Orders.Application.csproj" />
+    <ProjectReference Include="..\PayZe.Payment.Application\PayZe.Payment.Application.csproj" />
+    <ProjectReference Include="..\PayZe.Payment.Infrastructure\PayZe.Payment.Infrastructure.csproj" />
+    <ProjectReference Include="..\PayZe.Payment.RabbitMq\PayZe.Payment.RabbitMq.csproj" />
+  </ItemGroup>
+
+</Project>

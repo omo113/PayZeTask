@@ -6,7 +6,6 @@ using PayZe.Orders.Application.Dtos.OrdersDtos;
 namespace PayZe.Orders.Api.Controllers;
 
 [Route("api/order")]
-[ApiController]
 public class OrderController : ApiControllerBase
 {
     private readonly IMediator _mediator;

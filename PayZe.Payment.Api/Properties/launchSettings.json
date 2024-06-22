@@ -1,0 +1,21 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "PayZE.Payment.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "settings__RabbitMqHost": "localhost",
+        "settings__RabbitMqUser": "admin",
+        "settings__RabbitMqPassword": "admin",
+        "settings__DatabaseConnection": "Host=localhost; Database=dotnet-PayZe-Identity; Username=myuser; Password=mypassword;Pooling=true;",
+        "settings__RedisConnectionString": "localhost:6379",
+        "settings__IdentityUrl": "https://localhost:7259"
+
+      },
+      "applicationUrl": "https://localhost:7350"
+    }
+  }
+}
