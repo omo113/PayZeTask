@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using PayZe.Identity.Api;
 using PayZe.Identity.Api.Middlewares;
 using PayZe.Identity.Application;
@@ -5,6 +6,7 @@ using PayZe.Identity.Application.Services;
 using PayZe.Identity.Infrastructure;
 using PayZe.Identity.RabbitMq;
 using PayZe.Shared;
+using PayZe.Shared.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +24,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerSettings();
 var app = builder.Build();
-
+var x = app.Services.GetRequiredService<IOptions<EnvironmentSettings>>();
 app.MapGrpcService<GrpcIdentityService>();
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseCors("AllowOrigin");

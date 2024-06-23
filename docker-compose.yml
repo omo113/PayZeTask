@@ -11,12 +11,20 @@ services:
       - settings__RabbitMqHost=payze-rabbitmq
       - settings__RabbitMqUser=admin
       - settings__RabbitMqPassword=admin
-      - settings__DatabaseConnection=Host=payment-db;Database=mydatabase;Username=admin;Password=admin;Pooling=true;
+      - settings__DatabaseConnection=Host=payment-db;Database=payze-payment;Username=admin;Password=admin;Pooling=true;
       - settings__RedisConnectionString=payze-redis:6379
       - settings__IdentityUrl=payze.identity.api
+      - ASPNETCORE_HTTP_PORTS=7005
     networks:
       - backend
-
+    depends_on:
+      - payze-rabbitmq
+      - payment-db    
+    ports:
+      - 8082:8080
+    expose:
+      - 8082
+      - 8083
   payze.orders.api:
     image: ${DOCKER_REGISTRY-}payzeordersapi
     build:
@@ -27,12 +35,19 @@ services:
       - settings__RabbitMqHost=payze-rabbitmq
       - settings__RabbitMqUser=admin
       - settings__RabbitMqPassword=admin
-      - settings__DatabaseConnection=Host=orders-db;Database=mydatabase;Username=admin;Password=admin;Pooling=true;
+      - settings__DatabaseConnection=Host=orders-db;Database=payze-orders;Username=admin;Password=admin;Pooling=true;
       - settings__RedisConnectionString=payze-redis:6379
       - settings__IdentityUrl=payze.identity.api
     networks:
       - backend
-
+    depends_on:
+      - payze-rabbitmq
+      - orders-db
+    ports:
+      - 8084:8080
+    expose:
+      - 8084
+      - 8085 
   payze.identity.api:
     image: ${DOCKER_REGISTRY-}payzeidentityapi
     build:
@@ -43,23 +58,27 @@ services:
       - settings__RabbitMqHost=payze-rabbitmq
       - settings__RabbitMqUser=admin
       - settings__RabbitMqPassword=admin
-      - settings__DatabaseConnection=Host=identity-db;Database=mydatabase;Username=admin;Password=admin;Pooling=true;
+      - settings__DatabaseConnection=Host=identity-db;Database=payze-identity;Username=admin;Password=admin;Pooling=true;
       - settings__RedisConnectionString=payze-redis:6379
     ports:
-      - 7001:80
-      - 7777:7777
+      - 8080:8080
+    depends_on:
+      - payze-rabbitmq
+      - identity-db
     networks:
       - backend
-
+    expose:
+      - 8080
+      - 8081 
   identity-db:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+      - POSTGRES_DB=payze-identity
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
     ports:
-      - '5442:5432'
+      - '5432:5432'
     volumes:
       - identity_db_data:/var/lib/postgresql/data
     networks:
@@ -87,7 +106,7 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
     ports:
-      - '5440:5432'
+      - '5433:5432'
     volumes:
       - payment_db_data:/var/lib/postgresql/data
     networks:
@@ -97,12 +116,12 @@ services:
     container_name: payze-rabbitmq
     image: docker.io/bitnami/rabbitmq:3.10
     ports:
-      - '4368:4369'
-      - '5555:5551'
-      - '5554:5552'
-      - '5673:5672'
-      - '25673:25672'
-      - '15673:15672'
+      - '4369:4369'
+      - '5551:5551'
+      - '5552:5552'
+      - '5672:5672'
+      - '25672:25672'
+      - '15672:15672'
     environment:
       - RABBITMQ_SECURE_PASSWORD=yes
       - RABBITMQ_USERNAME=admin
@@ -117,7 +136,7 @@ services:
     container_name: payze-redis
     image: redis:latest
     ports:
-      - "6380:6379"
+      - "6379:6379"
     volumes:
       - redis_data:/data
     command: redis-server --appendonly yes

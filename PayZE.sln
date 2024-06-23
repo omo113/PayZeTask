@@ -46,6 +46,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Payment.Api", "PayZe.Payment.Api\PayZe.Payment.Api.csproj", "{218485A7-A6CD-42F9-9CF8-D007D8027201}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FA628D1A-93A2-45D0-91FB-8ECB93AB1C4E}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5DDCD36B-070E-4BB0-B1DC-A9C16092B6C2}"
 EndProject
