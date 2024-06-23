@@ -26,7 +26,7 @@ var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseCors("AllowOrigin");
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

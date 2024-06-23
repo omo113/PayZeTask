@@ -1,0 +1,135 @@
+version: '3'
+
+services:
+  payze.payment.api:
+    image: ${DOCKER_REGISTRY-}payzepaymentapi
+    build:
+      context: .
+      dockerfile: PayZe.Payment.Api/Dockerfile    
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - settings__RabbitMqHost=payze-rabbitmq
+      - settings__RabbitMqUser=admin
+      - settings__RabbitMqPassword=admin
+      - settings__DatabaseConnection=Host=payment-db;Database=mydatabase;Username=admin;Password=admin;Pooling=true;
+      - settings__RedisConnectionString=payze-redis:6379
+      - settings__IdentityUrl=payze.identity.api
+    networks:
+      - backend
+
+  payze.orders.api:
+    image: ${DOCKER_REGISTRY-}payzeordersapi
+    build:
+      context: .
+      dockerfile: PayZe.Orders.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - settings__RabbitMqHost=payze-rabbitmq
+      - settings__RabbitMqUser=admin
+      - settings__RabbitMqPassword=admin
+      - settings__DatabaseConnection=Host=orders-db;Database=mydatabase;Username=admin;Password=admin;Pooling=true;
+      - settings__RedisConnectionString=payze-redis:6379
+      - settings__IdentityUrl=payze.identity.api
+    networks:
+      - backend
+
+  payze.identity.api:
+    image: ${DOCKER_REGISTRY-}payzeidentityapi
+    build:
+      context: .
+      dockerfile: PayZE.Company.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - settings__RabbitMqHost=payze-rabbitmq
+      - settings__RabbitMqUser=admin
+      - settings__RabbitMqPassword=admin
+      - settings__DatabaseConnection=Host=identity-db;Database=mydatabase;Username=admin;Password=admin;Pooling=true;
+      - settings__RedisConnectionString=payze-redis:6379
+    ports:
+      - 7001:80
+      - 7777:7777
+    networks:
+      - backend
+
+  identity-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - '5442:5432'
+    volumes:
+      - identity_db_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  orders-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - '5441:5432'
+    volumes:
+      - orders_db_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  payment-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - '5440:5432'
+    volumes:
+      - payment_db_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  payze-rabbitmq:
+    container_name: payze-rabbitmq
+    image: docker.io/bitnami/rabbitmq:3.10
+    ports:
+      - '4368:4369'
+      - '5555:5551'
+      - '5554:5552'
+      - '5673:5672'
+      - '25673:25672'
+      - '15673:15672'
+    environment:
+      - RABBITMQ_SECURE_PASSWORD=yes
+      - RABBITMQ_USERNAME=admin
+      - RABBITMQ_PASSWORD=admin
+      - RABBITMQ_LOGS=-
+    volumes:
+      - rabbitmq_data:/bitnami/rabbitmq/mnesia
+    networks:
+      - backend
+
+  payze-redis:
+    container_name: payze-redis
+    image: redis:latest
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - backend
+
+volumes:
+  identity_db_data:
+  orders_db_data:
+  payment_db_data:
+  rabbitmq_data:
+  redis_data:
+
+networks:
+  backend:

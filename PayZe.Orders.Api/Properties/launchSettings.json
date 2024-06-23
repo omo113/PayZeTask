@@ -1,5 +1,4 @@
-﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
+{
   "profiles": {
     "PayZE.Orders.Api": {
       "commandName": "Project",
@@ -16,5 +15,6 @@
       },
       "applicationUrl": "https://localhost:7300"
     }
-  }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json"
 }

@@ -35,15 +35,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{0D8E8DF1-B0E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{5F818D9D-CF9B-4067-8B9E-4731FE18D8F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Payment.RabbitMq", "PayZe.Payment.RabbitMq\PayZe.Payment.RabbitMq.csproj", "{956B1738-22AA-4FE2-ABEE-25E629C6E7F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Payment.RabbitMq", "PayZe.Payment.RabbitMq\PayZe.Payment.RabbitMq.csproj", "{956B1738-22AA-4FE2-ABEE-25E629C6E7F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Payment.Infrastructure", "PayZe.Payment.Infrastructure\PayZe.Payment.Infrastructure.csproj", "{288B37A6-E619-450A-9A51-BC085DF4A4AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Payment.Infrastructure", "PayZe.Payment.Infrastructure\PayZe.Payment.Infrastructure.csproj", "{288B37A6-E619-450A-9A51-BC085DF4A4AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Payment.Domain", "PayZe.Payment.Domain\PayZe.Payment.Domain.csproj", "{8EADC460-1954-4CFB-AA1B-5DA3C32D7AA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Payment.Domain", "PayZe.Payment.Domain\PayZe.Payment.Domain.csproj", "{8EADC460-1954-4CFB-AA1B-5DA3C32D7AA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Payment.Application", "PayZe.Payment.Application\PayZe.Payment.Application.csproj", "{ABFBE19B-07ED-4352-9D7B-3279FEECF940}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Payment.Application", "PayZe.Payment.Application\PayZe.Payment.Application.csproj", "{ABFBE19B-07ED-4352-9D7B-3279FEECF940}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayZe.Payment.Api", "PayZe.Payment.Api\PayZe.Payment.Api.csproj", "{218485A7-A6CD-42F9-9CF8-D007D8027201}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayZe.Payment.Api", "PayZe.Payment.Api\PayZe.Payment.Api.csproj", "{218485A7-A6CD-42F9-9CF8-D007D8027201}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FA628D1A-93A2-45D0-91FB-8ECB93AB1C4E}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5DDCD36B-070E-4BB0-B1DC-A9C16092B6C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +123,10 @@ Global
 		{218485A7-A6CD-42F9-9CF8-D007D8027201}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{218485A7-A6CD-42F9-9CF8-D007D8027201}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{218485A7-A6CD-42F9-9CF8-D007D8027201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DDCD36B-070E-4BB0-B1DC-A9C16092B6C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DDCD36B-070E-4BB0-B1DC-A9C16092B6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DDCD36B-070E-4BB0-B1DC-A9C16092B6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DDCD36B-070E-4BB0-B1DC-A9C16092B6C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +152,7 @@ Global
 		{8EADC460-1954-4CFB-AA1B-5DA3C32D7AA5} = {5F818D9D-CF9B-4067-8B9E-4731FE18D8F6}
 		{ABFBE19B-07ED-4352-9D7B-3279FEECF940} = {5F818D9D-CF9B-4067-8B9E-4731FE18D8F6}
 		{218485A7-A6CD-42F9-9CF8-D007D8027201} = {5F818D9D-CF9B-4067-8B9E-4731FE18D8F6}
+		{5DDCD36B-070E-4BB0-B1DC-A9C16092B6C2} = {FA628D1A-93A2-45D0-91FB-8ECB93AB1C4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16C34339-8B00-4C0A-8452-14F380C7E32D}
