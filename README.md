@@ -18,15 +18,8 @@ Before you begin, ensure you have the following installed on your machine:
     cd your-repo
     ```
 
-2. **Environment Variables**
 
-    Ensure you have a `.env` file in the root of your project directory with the following content:
-
-    ```env
-    DOCKER_REGISTRY=
-    ```
-
-3. **Build and Start the Services**
+2. **Build and Start the Services**
 
     Use Docker Compose to build and start the services:
 
