@@ -79,6 +79,6 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, App
         await _repository.Store(order);
         await _unitOfWork.SaveAsync();
         return new ApplicationResult<OderDetailsDto, ApplicationError>(
-            new OderDetailsDto(order.UId, company.UId, order.Currency, order.Amount, order.CreateDate));
+            new OderDetailsDto(order.UId, company.UId, order.Currency, order.Amount, order.CreateDate, order.OrderStatus));
     }
 }

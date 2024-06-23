@@ -12,7 +12,7 @@ using PayZe.Orders.Infrastructure.Persistence;
 namespace PayZe.Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20240622205737_initialMigration")]
+    [Migration("20240623221657_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />

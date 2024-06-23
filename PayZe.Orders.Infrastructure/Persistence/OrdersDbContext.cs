@@ -16,10 +16,10 @@ public class OrdersDbContext : DbContext, IMigrationDbContext
         : base(options)
     {
     }
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-    //    optionsBuilder.UseNpgsql("Host=localhost; Database=dotnet-PayZe-Orders; Username=myuser; Password=mypassword;Pooling=true;");
-    //}
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseNpgsql("Host=localhost; Database=dotnet-PayZe-Orders; Username=myuser; Password=mypassword;Pooling=true;");
+    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

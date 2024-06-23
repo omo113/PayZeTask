@@ -24,7 +24,7 @@ public class OrdersQueryHandler : IRequestHandler<OrdersQuery, ApplicationResult
         var skip = request.Query.PageIndex * request.Query.PageSize;
         var take = request.Query.PageSize;
         var query = _orderRepository.Query(x => x.Company.UId == request.CompanyId)
-            .Select(x => new OderDetailsDto(x.UId, x.Company.UId, x.Currency, x.Amount, x.CreateDate));
+            .Select(x => new OderDetailsDto(x.UId, x.Company.UId, x.Currency, x.Amount, x.CreateDate, x.OrderStatus));
         var data = await query
             .Skip(skip)
             .Take(take)
