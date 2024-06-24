@@ -16,11 +16,6 @@ public class IdentityDbContext : DbContext, IMigrationDbContext
         : base(options)
     {
     }
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-    //    optionsBuilder.UseNpgsql("Host=localhost; Database=dotnet-PayZe-CompanyIdentity; Username=myuser; Password=mypassword;Pooling=true;");
-    //}
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

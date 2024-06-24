@@ -34,11 +34,11 @@ Before you begin, ensure you have the following installed on your machine:
 After running the `docker-compose up --build` command, the following services will be available:
 
 - **PayZe Payment API**
-  - URL: `http://localhost:8082`
+  - URL: `http://localhost:8082/swagger/index.html`
 - **PayZe Orders API**
-  - URL: `http://localhost:8084`
+  - URL: `http://localhost:8084/swagger/index.html`
 - **PayZe Identity API**
-  - URL: `http://localhost:8080`
+  - URL: `http://localhost:8080/swagger/index.html`
 
 ### Service Details
 

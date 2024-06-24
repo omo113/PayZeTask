@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using PayZe.Orders.Api.Abstractions;
 using PayZe.Orders.Application.Commands.OrdersCommands;
 using PayZe.Orders.Application.Dtos.OrdersDtos;
@@ -18,6 +19,7 @@ public class OrderController : ApiControllerBase
     }
 
     [HttpPost]
+    [EnableRateLimiting("fixed-by-ip")]
     public async Task<IActionResult> CreateOrderAsync([FromBody] CreateOrderDto request)
     {
 
