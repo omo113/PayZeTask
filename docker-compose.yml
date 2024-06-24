@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   payze.payment.api:
@@ -13,18 +13,17 @@ services:
       - settings__RabbitMqPassword=admin
       - settings__DatabaseConnection=Host=payment-db;Database=payze-payment;Username=admin;Password=admin;Pooling=true;
       - settings__RedisConnectionString=payze-redis:6379
-      - settings__IdentityUrl=payze.identity.api
-      - ASPNETCORE_HTTP_PORTS=7005
+      - settings__IdentityUrl=http://payze.identity.api:5000  # Updated
     networks:
       - backend
     depends_on:
       - payze-rabbitmq
-      - payment-db    
+      - payment-db
+      - payze.identity.api
     ports:
       - 8082:8080
-    expose:
-      - 8082
-      - 8083
+      - 5001:5001
+
   payze.orders.api:
     image: ${DOCKER_REGISTRY-}payzeordersapi
     build:
@@ -37,17 +36,17 @@ services:
       - settings__RabbitMqPassword=admin
       - settings__DatabaseConnection=Host=orders-db;Database=payze-orders;Username=admin;Password=admin;Pooling=true;
       - settings__RedisConnectionString=payze-redis:6379
-      - settings__IdentityUrl=payze.identity.api
+      - settings__IdentityUrl=http://payze.identity.api:5000  # Updated
     networks:
       - backend
     depends_on:
       - payze-rabbitmq
       - orders-db
+      - payze.identity.api
     ports:
       - 8084:8080
-    expose:
-      - 8084
-      - 8085 
+      - 5002:5002
+
   payze.identity.api:
     image: ${DOCKER_REGISTRY-}payzeidentityapi
     build:
@@ -60,16 +59,19 @@ services:
       - settings__RabbitMqPassword=admin
       - settings__DatabaseConnection=Host=identity-db;Database=payze-identity;Username=admin;Password=admin;Pooling=true;
       - settings__RedisConnectionString=payze-redis:6379
+      - Kestrel__Endpoints__Grpc__Protocols=Http2
+      - Kestrel__Endpoints__Grpc__Url=http://+:5000
+      - Kestrel__Endpoints__WebApi__Protocols=Http1
+      - Kestrel__Endpoints__WebApi__Url=Http://+:8080
     ports:
       - 8080:8080
+      - 5000:5000
     depends_on:
       - payze-rabbitmq
       - identity-db
     networks:
       - backend
-    expose:
-      - 8080
-      - 8081 
+
   identity-db:
     image: postgres:latest
     restart: always

@@ -19,7 +19,6 @@ public class IdentityCompanyGrpcClient : IIdentityCompanyGrpcClient
     {
         _logger = logger;
         _settings = settings.Value;
-        _settings.IdentityUrl = "https://localhost:7259";//todo
     }
     public async Task<CompanyGrpcResponse> GetAuction(string apiKey)
     {

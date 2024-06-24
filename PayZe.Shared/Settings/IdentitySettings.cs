@@ -7,6 +7,7 @@ public class IdentitySettings
     private readonly IdentitySettingsValidator _validator = new();
     public const string SectionName = "settings";
     public string IdentityUrl { get; set; }
+    public string Port { get; set; }
     public void ValidateAndThrow()
     {
         _validator.ValidateAndThrow(this);

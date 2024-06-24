@@ -11,20 +11,10 @@
         "settings__RabbitMqPassword": "admin",
         "settings__DatabaseConnection": "Host=localhost; Database=dotnet-PayZe-Orders; Username=myuser; Password=mypassword;Pooling=true;",
         "settings__RedisConnectionString": "localhost:6379",
-        "settings__IdentityUrl": "https://localhost:7259"
+        "settings__IdentityUrl": "https://localhost:7259",
+        "settings__Port": "5001"
       },
       "applicationUrl": "https://localhost:7300"
-    },
-    "Container (Dockerfile)": {
-      "commandName": "Docker",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "environmentVariables": {
-        "ASPNETCORE_HTTPS_PORTS": "8081",
-        "ASPNETCORE_HTTP_PORTS": "8080"
-      },
-      "publishAllPorts": true,
-      "useSSL": true
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json"

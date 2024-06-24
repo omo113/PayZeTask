@@ -28,7 +28,7 @@ public static class DIExtension
             var identitySettings = new IdentitySettings();
             hostContext.Configuration.GetSection(IdentitySettings.SectionName).Bind(identitySettings);
             identitySettings.ValidateAndThrow();
-            sc.Configure<EnvironmentSettings>(hostContext.Configuration.GetSection(EnvironmentSettings.SectionName));
+            sc.Configure<IdentitySettings>(hostContext.Configuration.GetSection(IdentitySettings.SectionName));
         });
 
         return builder;

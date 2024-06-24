@@ -13,10 +13,11 @@ public class ServiceA : IPaymentProcessor
     private readonly ILogger<ServiceA> _logger;
     private readonly IRepository<Domain.Aggregates.PaymentAggregate.Payment> _repository;
     private readonly IUnitOfWork _unitOfWork;
-    public ServiceA(ILogger<ServiceA> logger, IUnitOfWork unitOfWork)
+    public ServiceA(ILogger<ServiceA> logger, IUnitOfWork unitOfWork, IRepository<Domain.Aggregates.PaymentAggregate.Payment> repository)
     {
         _logger = logger;
         _unitOfWork = unitOfWork;
+        _repository = repository;
     }
 
     public async Task ComputeOrder(ComputeOrderDto computeOrderDto, CancellationToken cancellationToken)
